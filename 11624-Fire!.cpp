@@ -12,11 +12,11 @@ struct point {
 };
 
 char input[S][S];
-int check[S][S];
-int checkJ[S][S];
+int fireVisited[S][S];
+int joeVisited[S][S];
 int R, C;
 int minimum;
-point arr[1000002];
+point queue[1000002];
 int first, last;
 
 void initData() {
@@ -24,8 +24,8 @@ void initData() {
 	for (int i = 0;i < R;i++) {
 		for (int j = 0;j < C;j++) {
 			input[i][j] = ' ';
-			check[i][j] = 0;
-			checkJ[i][j] = 0;
+			fireVisited[i][j] = 0;
+			joeVisited[i][j] = 0;
 		}
 	}
 }
@@ -33,26 +33,26 @@ void initData() {
 void initArr() {
 	first = 0, last = -1;
 	for (int i = 0;i < R*C;i++) {
-		arr[i].x = 0;
-		arr[i].y = 0;
-		arr[i].dis = 0;
+		queue[i].x = 0;
+		queue[i].y = 0;
+		queue[i].dis = 0;
 	}
 }
 
 void push(int x,int y,int dis) {
 	++last;
-	arr[last].x = x;
-	arr[last].y = y;
-	arr[last].dis = dis;
+	queue[last].x = x;
+	queue[last].y = y;
+	queue[last].dis = dis;
 }
 
 point pop() {
-	return arr[first++];
+	return queue[first++];
 }
 
 void joe(int i, int j, int dis) {
 	push(i, j, dis);
-	checkJ[i][j] = 1;
+	joeVisited[i][j] = 1;
 
 	while (first <= last) {
 		point p = pop();
@@ -64,26 +64,26 @@ void joe(int i, int j, int dis) {
 			break;
 		}
 
-		if (input[p.x][p.y + 1] == '.' && (check[p.x][p.y + 1] > dis || check[p.x][p.y + 1]==0) && checkJ[p.x][p.y + 1]==0) {
+		if (input[p.x][p.y + 1] == '.' && (fireVisited[p.x][p.y + 1] > dis || fireVisited[p.x][p.y + 1]==0) && joeVisited[p.x][p.y + 1]==0) {
 			push(p.x, p.y + 1, dis);
-			checkJ[p.x][p.y + 1] = dis;
+			joeVisited[p.x][p.y + 1] = dis;
 			
 		}
 
-		if (input[p.x][p.y - 1] == '.' && checkJ[p.x][p.y - 1] == 0 && (check[p.x][p.y - 1]>dis || check[p.x][p.y - 1]==0)) {
+		if (input[p.x][p.y - 1] == '.' && joeVisited[p.x][p.y - 1] == 0 && (fireVisited[p.x][p.y - 1]>dis || fireVisited[p.x][p.y - 1]==0)) {
 			push(p.x, p.y - 1, dis);
-			checkJ[p.x][p.y - 1] = dis;
+			joeVisited[p.x][p.y - 1] = dis;
 			
 		}
 
-		if (input[p.x + 1][p.y] == '.' && checkJ[p.x + 1][p.y] == 0 && (check[p.x + 1][p.y] > dis || check[p.x + 1][p.y]==0)) {
+		if (input[p.x + 1][p.y] == '.' && joeVisited[p.x + 1][p.y] == 0 && (fireVisited[p.x + 1][p.y] > dis || fireVisited[p.x + 1][p.y]==0)) {
 			push(p.x + 1, p.y, dis);
-			checkJ[p.x + 1][p.y] = dis;
+			joeVisited[p.x + 1][p.y] = dis;
 			
 		}
-		if (input[p.x - 1][p.y] == '.' && checkJ[p.x - 1][p.y] == 0 && (check[p.x - 1][p.y] > dis || check[p.x - 1][p.y]==0)) {
+		if (input[p.x - 1][p.y] == '.' && joeVisited[p.x - 1][p.y] == 0 && (fireVisited[p.x - 1][p.y] > dis || fireVisited[p.x - 1][p.y]==0)) {
 			push(p.x - 1, p.y, dis);
-			checkJ[p.x - 1][p.y] = dis;
+			joeVisited[p.x - 1][p.y] = dis;
 		}
 
 	}
@@ -94,21 +94,21 @@ void fire() {
 	while (first <= last) {
 		point p = pop();
 		dis = p.dis+1;
-		if ((input[p.x][p.y + 1] == '.' || input[p.x][p.y + 1] == 'J')  && check[p.x][p.y + 1]==0) {
+		if ((input[p.x][p.y + 1] == '.' || input[p.x][p.y + 1] == 'J')  && fireVisited[p.x][p.y + 1]==0) {
 			push(p.x, p.y + 1,dis);
-			check[p.x][p.y + 1] = dis;
+			fireVisited[p.x][p.y + 1] = dis;
 		}
-		if ((input[p.x][p.y - 1] == '.' || input[p.x][p.y - 1] == 'J') && check[p.x][p.y - 1] == 0) {
+		if ((input[p.x][p.y - 1] == '.' || input[p.x][p.y - 1] == 'J') && fireVisited[p.x][p.y - 1] == 0) {
 			push(p.x, p.y - 1,dis);
-			check[p.x][p.y - 1] = dis;
+			fireVisited[p.x][p.y - 1] = dis;
 		}
-		if ((input[p.x + 1][p.y] == '.' || input[p.x + 1][p.y] =='J') && check[p.x + 1][p.y] == 0) {
+		if ((input[p.x + 1][p.y] == '.' || input[p.x + 1][p.y] =='J') && fireVisited[p.x + 1][p.y] == 0) {
 			push(p.x + 1, p.y,dis);
-			check[p.x + 1][p.y] = dis;
+			fireVisited[p.x + 1][p.y] = dis;
 		}
-		if ((input[p.x - 1][p.y] == '.' || input[p.x - 1][p.y] == 'J' )&& check[p.x - 1][p.y] == 0) {
+		if ((input[p.x - 1][p.y] == '.' || input[p.x - 1][p.y] == 'J' )&& fireVisited[p.x - 1][p.y] == 0) {
 			push(p.x - 1, p.y,dis);
-			check[p.x - 1][p.y] = dis;
+			fireVisited[p.x - 1][p.y] = dis;
 		}
 	}
 }
@@ -133,8 +133,8 @@ int main() {
 				cin >> c;
 				if (c == '#') {
 					input[j][k] = c;
-					check[j][k] = -1;
-					checkJ[j][k] = -1;
+					fireVisited[j][k] = -1;
+					joeVisited[j][k] = -1;
 				}
 				else if (c == '.') {
 					input[j][k] = c;
@@ -149,7 +149,7 @@ int main() {
 					fx = j;
 					fy = k;
 					push(fx, fy,0);
-					check[j][k] = 1;
+					fireVisited[j][k] = 1;
 				}
 				
 			}
