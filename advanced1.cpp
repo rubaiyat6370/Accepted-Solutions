@@ -74,7 +74,7 @@ void bfs() {
 }
 
 void findPath(int x) {
-	vis[x] = 0;
+	//vis[x] = 0;
 	path[index++] = x;
 	double mx = 0;
 	int temp;
@@ -108,7 +108,7 @@ int main() {
 	bfs();
 
 	weight[0][1] = 0;
-	initVis();
+	//initVis();
 	if (T - 10 >= 0) {
 		T -= 10;
 		findPath(1);
