@@ -35,6 +35,7 @@ vector<int> array_left_rotation(vector<int> a, int n, int k) {
 			int left = k - (i);
 			out[n - left] = a[i];
 		}
+		//out[(i+n-k)%n] = a[i];  // right rotation (i+k)%n
 	}
 	return out;
 }
