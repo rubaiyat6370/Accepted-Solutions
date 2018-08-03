@@ -367,3 +367,61 @@ int calc_sum(char* arg_obj){
 	parseInput(arg_obj);
 	return mySum(param.x, param.y, param.l, param.w);
 }
+
+// Sample Input
+/**
+2
+
+{length:5,width:5}
+9
+1 {x:3,y:4,h:5}
+1 {x:5,y:2,h:7}
+1 {x:3,y:4,h:3}
+3 5 {x:3,y:4,l:1,w:1}
+4 8 {x:3,y:4,l:1,w:1}
+3 7 {x:1,y:1,l:5,w:5}
+2 {x:3,y:4}
+3 5 {x:3,y:4,l:2,w:1}
+4 5 {x:3, y:4, l:1, w:2}
+
+{length:15,width:15}
+12
+3 0 {x:3,l:7,y:4,w:8}
+4 0 {l:4,x:3,voot:8,y:4,w:3}
+1 {voot:90,y:14,h:5,x:13}
+1 {n: 4, x: 15, xy:4, length:6,h:7,y:12  }
+1 {x:15,y:12,h:37,m:0}
+1 {y   : 11, h:  31,x: 13,  k  : 45 , kk : 23   }
+1 {x:13,width:24,y:11,h:3}
+1 { y:14 ,p:20, x: 13 ,h:15  , w    :4}
+3 37 { x:11,y:11,l:5,w:5 }
+4 54 {  y:10,  l  :  5  , X :  13 , x:10,w  :5 }
+2 {  a:11,Y:13,y:11,X:11,x:13,yyy:34}
+4 31 { x: 12,y:11,w:3,  l  : 3,  voot: 34  }
+
+
+5
+
+537
+
+925578
+701458
+891300
+457202
+863743
+
+**/
+
+/**
+sample output
+test 0: 1
+test 1: 1
+test 2: 1
+test 3: 1
+test 4: 1
+test 5: 1
+test 6: 1
+---------------
+total points: 7
+
+*/
