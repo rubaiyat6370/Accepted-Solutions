@@ -59,3 +59,5 @@ class Solution {
         
     }
 }
+
+//https://app.codility.com/demo/results/trainingZZXHHJ-97R/
