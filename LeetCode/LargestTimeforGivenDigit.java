@@ -1,23 +1,9 @@
 class Solution {
-    int[] visited = {
-        0,
-        0,
-        0,
-        0
-    };
-    int[] answer = {-1,
-        -1,
-        -1,
-        -1
-    };
+    int[] visited = {0, 0, 0, 0};
+    int[] answer = {-1, -1, -1, -1};
     int max = 0;
     public String largestTimeFromDigits(int[] A) {
-        int[] time = {
-            0,
-            0,
-            0,
-            0
-        };
+        int[] time = {0, 0, 0, 0};
         permutation(0, A, time, 0);
 
         StringBuilder sb = new StringBuilder();
