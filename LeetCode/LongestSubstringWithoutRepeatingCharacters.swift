@@ -9,9 +9,7 @@ class Solution {
                 end += 1
             } else {
                 set.remove(arr[start])
-                //set.insert(arr[end])
                 start += 1
-                //end += 1
             }
             maxLength = max(maxLength, end-start)
         }
